@@ -4,6 +4,11 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
+## ER model
+
+![drivo](https://github.com/user-attachments/assets/4cf69cc4-2b95-4cd6-ad2c-eb2b7aabeb27)
+
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
