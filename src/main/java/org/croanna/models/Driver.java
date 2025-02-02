@@ -14,9 +14,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Driver extends PanacheEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
 
     public String name;
 

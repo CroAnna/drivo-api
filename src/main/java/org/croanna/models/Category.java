@@ -1,6 +1,10 @@
 package org.croanna.models;
 
-import jakarta.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +18,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
-
+public class Category extends PanacheEntity {
+   
     public String title;
 
     public String description;

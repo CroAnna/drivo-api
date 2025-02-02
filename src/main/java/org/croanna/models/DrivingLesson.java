@@ -1,6 +1,10 @@
 package org.croanna.models;
 
-import jakarta.persistence.*;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,30 +18,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DrivingLesson {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+public class DrivingLesson extends PanacheEntity {
 
-    public LocalDateTime start;
+    public LocalDateTime start_time;
 
-    public LocalDateTime end;
+    public LocalDateTime end_time;
 
     public String location;
 
     public String comment;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    public Integer driverId;
-
-    @ManyToOne
-    @JoinColumn(name = "instructor_id")
-    public Integer instructorId;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    public Status status;
 
     @ManyToOne
     @JoinColumn(name = "driver_id")
@@ -46,4 +35,9 @@ public class DrivingLesson {
     @ManyToOne
     @JoinColumn(name = "instructor_id")
     public Instructor instructor;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    public Status status;
+
 }
