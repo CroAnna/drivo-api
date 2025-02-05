@@ -17,9 +17,15 @@ public class DriverService {
     @Inject
     DriverMapper mapper;
 
-    public List<DriverDTO> getAllDrivers() {
-        return repository.findAllWithCategory().stream()
+    public List<DriverDTO> getAllDrivers(int page, int size) {
+        return repository.findAll()
+                .page(page, size)
+                .stream()
                 .map(mapper::toDTO)
                 .toList();
+    }
+
+    public Long getTotal() {
+        return repository.count();
     }
 }

@@ -16,5 +16,5 @@ public class DriverDTO {
     private boolean passedTheoryTest;
     private Integer hoursDriven;
     private String phone;
-    private Long categoryId;
+    private CategoryDTO category;
 }

@@ -1,13 +1,14 @@
 package org.croanna.resources;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.croanna.dtos.DriverDTO;
+import org.croanna.responses.PaginatedResponse;
 import org.croanna.services.DriverService;
+
+import java.util.List;
 
 @Path("/api/drivers")
 @Produces(MediaType.APPLICATION_JSON)
@@ -18,8 +19,15 @@ public class DriverResource {
     DriverService driverService;
 
     @GET
-    public Response getAllDrivers() {
-        return Response.ok(driverService.getAllDrivers()).build();
+    public Response getAllDrivers(
+            @QueryParam("page") @DefaultValue("1") int page,
+            @QueryParam("size") @DefaultValue("10") int size
+    ) {
+        int zeroBasedPage = page - 1;
+        List<DriverDTO> drivers = driverService.getAllDrivers(zeroBasedPage, size);
+        long total = driverService.getTotal();
+
+        return Response.ok(new PaginatedResponse<>(drivers, total, page, size)).build();
     }
 }
 
