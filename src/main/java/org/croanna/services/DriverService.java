@@ -2,7 +2,8 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.croanna.models.Driver;
+import org.croanna.dtos.DriverDTO;
+import org.croanna.mappers.DriverMapper;
 import org.croanna.repositories.DriverRepository;
 
 import java.util.List;
@@ -11,9 +12,14 @@ import java.util.List;
 public class DriverService {
 
     @Inject
-    DriverRepository driverRepository;
+    DriverRepository repository;
 
-    public List<Driver> getAllDrivers() {
-        return driverRepository.listAll();
+    @Inject
+    DriverMapper mapper;
+
+    public List<DriverDTO> getAllDrivers() {
+        return repository.findAllWithCategory().stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 }
