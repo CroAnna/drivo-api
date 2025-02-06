@@ -8,6 +8,10 @@ If you want to learn more about Quarkus, please visit its website: <https://quar
 
 ![drivo](https://github.com/user-attachments/assets/4cf69cc4-2b95-4cd6-ad2c-eb2b7aabeb27)
 
+## Architecture
+
+![architecture](https://github.com/user-attachments/assets/830d65bd-29e6-4db3-adb8-cad88f002a56)
+
 
 ## Running the application in dev mode
 
