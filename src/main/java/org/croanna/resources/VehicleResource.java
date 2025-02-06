@@ -1,0 +1,32 @@
+package org.croanna.resources;
+
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.croanna.dtos.VehicleDTO;
+import org.croanna.responses.PaginatedResponse;
+import org.croanna.services.VehicleService;
+
+import java.util.List;
+
+@Path("/api/vehicles")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class VehicleResource {
+
+    @Inject
+    VehicleService vehicleService;
+
+    @GET
+    public Response getAllVehicles(
+            @QueryParam("page") @DefaultValue("1") int page,
+            @QueryParam("size") @DefaultValue("10") int size
+    ) {
+        int zeroBasedPage = page - 1;
+        List<VehicleDTO> vehicles = vehicleService.getAllVehicles(zeroBasedPage, size);
+        long total = vehicleService.getTotal();
+
+        return Response.ok(new PaginatedResponse<>(vehicles, total, page, size)).build();
+    }
+}
