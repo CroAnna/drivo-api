@@ -1,9 +1,6 @@
 package org.croanna.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Vehicle extends PanacheEntity {
+public class Vehicle {
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(name = "licence_plate")
-    public String licencePlate;
+    private String licencePlate;
 
-    public String model;
+    private String model;
 
-    public Integer year;
+    private Integer year;
 }

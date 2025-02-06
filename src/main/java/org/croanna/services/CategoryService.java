@@ -2,22 +2,22 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.croanna.dtos.VehicleDTO;
-import org.croanna.mappers.VehicleMapper;
-import org.croanna.repositories.VehicleRepository;
+import org.croanna.dtos.CategoryDTO;
+import org.croanna.mappers.CategoryMapper;
+import org.croanna.repositories.CategoryRepository;
 
 import java.util.List;
 
 @ApplicationScoped
-public class VehicleService {
+public class CategoryService {
+    
+    @Inject
+    CategoryRepository repository;
 
     @Inject
-    VehicleRepository repository;
+    CategoryMapper mapper;
 
-    @Inject
-    VehicleMapper mapper;
-
-    public List<VehicleDTO> getAllVehicles(int page, int size) {
+    public List<CategoryDTO> getAllCategories(int page, int size) {
         return repository.findAll(page, size)
                 .stream()
                 .map(mapper::toDTO)

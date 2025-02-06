@@ -1,7 +1,8 @@
 package org.croanna.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Status extends PanacheEntity {
+public class Status {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public String title;
+    private String title;
 }

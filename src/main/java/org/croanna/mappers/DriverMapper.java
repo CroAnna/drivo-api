@@ -13,13 +13,13 @@ public class DriverMapper {
 
     public DriverDTO toDTO(Driver driver) {
         return new DriverDTO(
-                driver.id,
-                driver.name,
-                driver.passedPracticalTest,
-                driver.passedTheoryTest,
-                driver.hoursDriven,
-                driver.phone,
-                driver.category != null ? categoryMapper.toDTO(driver.category) : null
+                driver.getId(),
+                driver.getName(),
+                driver.isPassedPracticalTest(),
+                driver.isPassedTheoryTest(),
+                driver.getHoursDriven(),
+                driver.getPhone(),
+                driver.getCategory() != null ? categoryMapper.toDTO(driver.getCategory()) : null
         );
     }
 }

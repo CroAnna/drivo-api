@@ -16,10 +16,10 @@ public class InstructorVehicle {
     @Id
     @ManyToOne
     @JoinColumn(name = "instructor_id")
-    public Instructor instructor;
+    private Instructor instructor;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
-    public Vehicle vehicle;
+    private Vehicle vehicle;
 }

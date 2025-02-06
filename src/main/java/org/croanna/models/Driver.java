@@ -1,6 +1,5 @@
 package org.croanna.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,22 +12,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Driver extends PanacheEntity {
+public class Driver {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public String name;
+    private String name;
 
     @Column(name = "passed_practical_test")
-    public boolean passedPracticalTest;
+    private boolean passedPracticalTest;
 
     @Column(name = "passed_theory_test")
-    public boolean passedTheoryTest;
+    private boolean passedTheoryTest;
 
     @Column(name = "hours_driven")
-    public Integer hoursDriven;
+    private Integer hoursDriven;
 
-    public String phone;
+    private String phone;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    public Category category;
+    private Category category;
 }

@@ -1,10 +1,6 @@
 package org.croanna.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,17 +14,20 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Category extends PanacheEntity {
-   
-    public String title;
+public class Category {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public String description;
+    private String title;
+
+    private String description;
 
     @Column(name = "required_hours")
-    public Integer requiredHours;
+    private Integer requiredHours;
 
     @Column(name = "minimal_age")
-    public Integer minimalAge;
+    private Integer minimalAge;
 
     @ManyToMany(mappedBy = "categories")
     private Set<Instructor> instructors;

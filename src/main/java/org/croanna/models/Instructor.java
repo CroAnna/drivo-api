@@ -1,6 +1,5 @@
 package org.croanna.models;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +14,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Instructor extends PanacheEntity {
+public class Instructor {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public String name;
+    private String name;
 
-    public String phone;
+    private String phone;
 
-    public String availability;
+    private String availability;
 
     @ManyToMany
     @JoinTable(

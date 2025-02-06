@@ -18,8 +18,7 @@ public class DriverService {
     DriverMapper mapper;
 
     public List<DriverDTO> getAllDrivers(int page, int size) {
-        return repository.findAll()
-                .page(page, size)
+        return repository.findAll(page, size)
                 .stream()
                 .map(mapper::toDTO)
                 .toList();

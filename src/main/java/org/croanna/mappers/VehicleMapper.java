@@ -9,10 +9,10 @@ public class VehicleMapper {
 
     public VehicleDTO toDTO(Vehicle vehicle) {
         return new VehicleDTO(
-                vehicle.id,
-                vehicle.licencePlate,
-                vehicle.model,
-                vehicle.year
+                vehicle.getId(),
+                vehicle.getLicencePlate(),
+                vehicle.getModel(),
+                vehicle.getYear()
         );
     }
 }
