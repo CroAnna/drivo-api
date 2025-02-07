@@ -1,12 +1,10 @@
-# drivo
+# Drivo
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+This is an API for driving school management dashboard system built using Quarkus, the Supersonic Subatomic Java Framework.
 
 ## ER model
 
-![drivo](https://github.com/user-attachments/assets/4cf69cc4-2b95-4cd6-ad2c-eb2b7aabeb27)
+![drivo-arc](https://github.com/user-attachments/assets/9f8551cb-fa84-4634-b1e4-ec6876a9f767)
 
 ## Architecture
 
