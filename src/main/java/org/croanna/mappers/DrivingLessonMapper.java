@@ -11,6 +11,9 @@ public class DrivingLessonMapper {
     @Inject
     DriverMapper driverMapper;
 
+    @Inject
+    InstructorMapper instructorMapper;
+
     public DrivingLessonDTO toDTO(DrivingLesson lesson) {
         return new DrivingLessonDTO(
                 lesson.getId(),
@@ -19,7 +22,8 @@ public class DrivingLessonMapper {
                 lesson.getLocation(),
                 lesson.getComment(),
                 lesson.getStatus(),
-                lesson.getDriver() != null ? driverMapper.toDTO(lesson.getDriver()) : null
+                lesson.getDriver() != null ? driverMapper.toDTO(lesson.getDriver()) : null,
+                lesson.getInstructor() != null ? instructorMapper.toDTO(lesson.getInstructor()) : null
         );
     }
 }
