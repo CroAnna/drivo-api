@@ -1,6 +1,5 @@
-package org.croanna.models;
+package org.croanna.dtos;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,33 +8,16 @@ import org.croanna.enums.StatusType;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "driving_lessons")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class DrivingLesson {
-    @Id
-    @GeneratedValue
+public class DrivingLessonDTO {
     private Long id;
-
     private LocalDateTime startTime;
-
     private LocalDateTime endTime;
-
     private String location;
-
     private String comment;
-
     private StatusType status;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_id")
-    private Driver driver;
-
-    @ManyToOne
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
-
+    private DriverDTO driver;
 }
