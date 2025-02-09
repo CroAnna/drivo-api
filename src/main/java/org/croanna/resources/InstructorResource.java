@@ -21,10 +21,11 @@ public class InstructorResource {
     @GET
     public Response getAllInstructors(
             @QueryParam("page") @DefaultValue("1") int page,
-            @QueryParam("size") @DefaultValue("10") int size
+            @QueryParam("size") @DefaultValue("10") int size,
+            @QueryParam("category_id") Long categoryId
     ) {
         int zeroBasedPage = page - 1;
-        List<InstructorDTO> instructors = instructorService.getAllInstructors(zeroBasedPage, size);
+        List<InstructorDTO> instructors = instructorService.getAllInstructors(zeroBasedPage, size, categoryId);
         long total = instructorService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(instructors, total, page, size)).build();

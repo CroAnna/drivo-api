@@ -1,6 +1,7 @@
 package org.croanna.resources;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -28,6 +29,14 @@ public class DriverResource {
         long total = driverService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(drivers, total, page, size)).build();
+    }
+
+    @POST
+    public Response addDriver(@Valid DriverDTO dto) {
+        DriverDTO newDriver = driverService.createDriver(dto);
+        return Response.status(Response.Status.CREATED)
+                .entity(newDriver)
+                .build();
     }
 }
 

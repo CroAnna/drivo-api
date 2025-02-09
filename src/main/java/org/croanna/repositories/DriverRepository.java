@@ -23,4 +23,9 @@ public class DriverRepository {
         return em.createQuery("SELECT COUNT(d) FROM Driver d", Long.class)
                 .getSingleResult();
     }
+
+    public Driver save(Driver driver) {
+        em.persist(driver);
+        return driver;
+    }
 }

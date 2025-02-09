@@ -4,12 +4,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.croanna.dtos.DriverDTO;
 import org.croanna.models.Driver;
+import org.croanna.repositories.CategoryRepository;
 
 @ApplicationScoped
 public class DriverMapper {
 
     @Inject
-    CategoryMapper categoryMapper;
+    CategoryRepository categoryRepository;
 
     public DriverDTO toDTO(Driver driver) {
         return new DriverDTO(
@@ -19,7 +20,20 @@ public class DriverMapper {
                 driver.isPassedTheoryTest(),
                 driver.getHoursDriven(),
                 driver.getPhone(),
-                driver.getCategory() != null ? categoryMapper.toDTO(driver.getCategory()) : null
+                driver.getCategory() != null ? driver.getCategory().getId() : null
+        );
+    }
+
+    public Driver toModel(DriverDTO driver) {
+        return new Driver(
+                driver.getId(),
+                driver.getName(),
+                driver.isPassedPracticalTest(),
+                driver.isPassedTheoryTest(),
+                driver.getHoursDriven(),
+                driver.getPhone(),
+                driver.getCategoryId() != null ?
+                        categoryRepository.findById(driver.getCategoryId()) : null
         );
     }
 }

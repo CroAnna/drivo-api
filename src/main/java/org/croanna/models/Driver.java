@@ -17,20 +17,30 @@ public class Driver {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @Column(name = "passed_practical_test")
-    private boolean passedPracticalTest;
+    private boolean passedPracticalTest = false;
 
     @Column(name = "passed_theory_test")
-    private boolean passedTheoryTest;
+    private boolean passedTheoryTest = false;
 
     @Column(name = "hours_driven")
     private Integer hoursDriven;
 
+    @Column(nullable = false)
     private String phone;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.hoursDriven == null) {
+            this.hoursDriven = 0;
+        }
+    }
+
 }
