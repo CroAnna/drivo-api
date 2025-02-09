@@ -23,4 +23,9 @@ public class VehicleRepository {
         return em.createQuery("SELECT COUNT(v) FROM Vehicle v", Long.class)
                 .getSingleResult();
     }
+
+    public Vehicle save(Vehicle vehicle) {
+        em.persist(vehicle);
+        return vehicle;
+    }
 }

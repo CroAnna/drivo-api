@@ -17,10 +17,12 @@ public class Vehicle {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "licence_plate")
+    @Column(name = "licence_plate", nullable = false)
     private String licencePlate;
 
+    @Column(nullable = false)
     private String model;
 
+    @Column(nullable = false)
     private Integer year;
 }

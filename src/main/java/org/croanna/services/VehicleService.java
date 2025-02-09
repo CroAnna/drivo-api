@@ -2,8 +2,10 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.croanna.dtos.VehicleDTO;
 import org.croanna.mappers.VehicleMapper;
+import org.croanna.models.Vehicle;
 import org.croanna.repositories.VehicleRepository;
 
 import java.util.List;
@@ -26,5 +28,12 @@ public class VehicleService {
 
     public Long getTotal() {
         return repository.count();
+    }
+
+    @Transactional
+    public VehicleDTO createVehicle(VehicleDTO dto) {
+        Vehicle vehicle = mapper.toModel(dto);
+        vehicle = repository.save(vehicle);
+        return mapper.toDTO(vehicle);
     }
 }

@@ -15,4 +15,13 @@ public class VehicleMapper {
                 vehicle.getYear()
         );
     }
+
+    public Vehicle toModel(VehicleDTO vehicle) {
+        return new Vehicle(
+                vehicle.getId(),
+                vehicle.getLicencePlate(),
+                vehicle.getModel(),
+                vehicle.getYear()
+        );
+    }
 }
