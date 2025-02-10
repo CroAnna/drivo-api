@@ -31,11 +31,11 @@ public class DrivingLesson {
     private StatusType status;
 
     @ManyToOne
-    @JoinColumn(name = "driver_id")
+    @JoinColumn(name = "driver_id", nullable = false)
     private Driver driver;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", nullable = false)
     private Instructor instructor;
 
 }

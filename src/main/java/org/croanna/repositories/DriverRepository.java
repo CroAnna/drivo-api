@@ -28,4 +28,11 @@ public class DriverRepository {
         em.persist(driver);
         return driver;
     }
+
+    public Driver findById(Long id) {
+        return em.createQuery("SELECT d FROM Driver d WHERE d.id = :id", Driver.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
 }

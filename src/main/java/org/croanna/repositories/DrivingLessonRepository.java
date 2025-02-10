@@ -9,7 +9,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class DrivingLessonRepository {
-    
+
     @PersistenceContext
     EntityManager em;
 
@@ -23,5 +23,10 @@ public class DrivingLessonRepository {
     public Long count() {
         return em.createQuery("SELECT COUNT(v) FROM DrivingLesson v", Long.class)
                 .getSingleResult();
+    }
+
+    public DrivingLesson save(DrivingLesson lesson) {
+        em.persist(lesson);
+        return lesson;
     }
 }

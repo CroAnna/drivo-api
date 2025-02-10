@@ -40,4 +40,10 @@ public class InstructorRepository {
         em.persist(instructor);
         return instructor;
     }
+
+    public Instructor findById(Long id) {
+        return em.createQuery("SELECT i FROM Instructor i WHERE i.id = :id", Instructor.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }

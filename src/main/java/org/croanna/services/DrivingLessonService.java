@@ -2,8 +2,10 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.croanna.dtos.DrivingLessonDTO;
 import org.croanna.mappers.DrivingLessonMapper;
+import org.croanna.models.DrivingLesson;
 import org.croanna.repositories.DrivingLessonRepository;
 
 import java.util.List;
@@ -26,5 +28,12 @@ public class DrivingLessonService {
 
     public Long getTotal() {
         return repository.count();
+    }
+
+    @Transactional
+    public DrivingLessonDTO createLesson(DrivingLessonDTO dto) {
+        DrivingLesson lesson = mapper.toModel(dto);
+        lesson = repository.save(lesson);
+        return mapper.toDTO(lesson);
     }
 }

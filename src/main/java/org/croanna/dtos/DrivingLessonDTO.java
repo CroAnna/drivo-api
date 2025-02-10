@@ -1,5 +1,6 @@
 package org.croanna.dtos;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,10 @@ public class DrivingLessonDTO {
     private String location;
     private String comment;
     private StatusType status;
-    private DriverDTO driver;
-    private InstructorDTO instructor;
+
+    @NotNull(message = "Driver ID cannot be null!")
+    private Long driverId;
+
+    @NotNull(message = "Instructor ID cannot be null!")
+    private Long instructorId;
 }

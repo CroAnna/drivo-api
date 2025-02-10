@@ -1,6 +1,7 @@
 package org.croanna.resources;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -28,5 +29,13 @@ public class DrivingLessonResource {
         long total = drivingLessonService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(lessons, total, page, size)).build();
+    }
+
+    @POST
+    public Response addDrivingLesson(@Valid DrivingLessonDTO dto) {
+        DrivingLessonDTO newLesson = drivingLessonService.createLesson(dto);
+        return Response.status(Response.Status.CREATED)
+                .entity(newLesson)
+                .build();
     }
 }

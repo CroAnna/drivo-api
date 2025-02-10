@@ -1,5 +1,7 @@
 package org.croanna.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,16 @@ import lombok.Setter;
 @Setter
 public class InstructorDTO {
     private Long id;
+
+    @NotNull(message = "Name cannot be null!")
+    @NotBlank(message = "Name cannot be blank!")
     private String name;
+
+    @NotNull(message = "Phone cannot be null!")
+    @NotBlank(message = "Phone cannot be blank!")
     private String phone;
+
+    @NotNull(message = "Availability cannot be null!")
+    @NotBlank(message = "Availability cannot be blank!")
     private String availability;
 }
