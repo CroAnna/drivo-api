@@ -2,6 +2,7 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.croanna.dtos.InstructorDTO;
 import org.croanna.mappers.InstructorMapper;
 import org.croanna.models.Instructor;
@@ -31,5 +32,12 @@ public class InstructorService {
 
     public Long getTotal() {
         return repository.count();
+    }
+
+    @Transactional
+    public InstructorDTO createInstructor(InstructorDTO dto) {
+        Instructor instructor = mapper.toModel(dto);
+        instructor = repository.save(instructor);
+        return mapper.toDTO(instructor);
     }
 }

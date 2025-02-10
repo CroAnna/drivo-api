@@ -20,10 +20,11 @@ public class CategoryResource {
     @GET
     public Response getAllCategories(
             @QueryParam("page") @DefaultValue("1") int page,
-            @QueryParam("size") @DefaultValue("10") int size
+            @QueryParam("size") @DefaultValue("10") int size,
+            @QueryParam("instructor_id") Long instructorId
     ) {
         int zeroBasedPage = page - 1;
-        List<CategoryDTO> categories = categoryService.getAllCategories(zeroBasedPage, size);
+        List<CategoryDTO> categories = categoryService.getAllCategories(zeroBasedPage, size, instructorId);
         long total = categoryService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(categories, total, page, size)).build();

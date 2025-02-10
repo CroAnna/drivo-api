@@ -17,7 +17,6 @@ public class InstructorRepository {
         String queryStr = "SELECT i FROM Instructor i";
 
         if (categoryId != null) {
-            System.out.println("nije null " + categoryId);
             queryStr += " JOIN i.categories c WHERE c.id = :categoryId";
         }
 
@@ -35,5 +34,10 @@ public class InstructorRepository {
     public Long count() {
         return em.createQuery("SELECT COUNT(i) FROM Instructor i", Long.class)
                 .getSingleResult();
+    }
+
+    public Instructor save(Instructor instructor) {
+        em.persist(instructor);
+        return instructor;
     }
 }

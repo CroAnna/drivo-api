@@ -1,6 +1,7 @@
 package org.croanna.resources;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -29,6 +30,14 @@ public class InstructorResource {
         long total = instructorService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(instructors, total, page, size)).build();
+    }
+
+    @POST
+    public Response addInstructor(@Valid InstructorDTO dto) {
+        InstructorDTO newInstructor = instructorService.createInstructor(dto);
+        return Response.status(Response.Status.CREATED)
+                .entity(newInstructor)
+                .build();
     }
 
 }
