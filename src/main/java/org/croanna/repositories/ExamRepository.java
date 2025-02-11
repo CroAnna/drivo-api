@@ -23,4 +23,9 @@ public class ExamRepository {
         return em.createQuery("SELECT COUNT(e) FROM Exam e", Long.class)
                 .getSingleResult();
     }
+
+    public Exam save(Exam exam) {
+        em.persist(exam);
+        return exam;
+    }
 }

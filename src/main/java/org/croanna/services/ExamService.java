@@ -2,8 +2,10 @@ package org.croanna.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.croanna.dtos.ExamDTO;
 import org.croanna.mappers.ExamMapper;
+import org.croanna.models.Exam;
 import org.croanna.repositories.ExamRepository;
 
 import java.util.List;
@@ -25,5 +27,13 @@ public class ExamService {
 
     public Long getTotal() {
         return repository.count();
+    }
+
+
+    @Transactional
+    public ExamDTO createExam(ExamDTO dto) {
+        Exam exam = mapper.toModel(dto);
+        exam = repository.save(exam);
+        return mapper.toDTO(exam);
     }
 }

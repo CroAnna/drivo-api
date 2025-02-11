@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.croanna.enums.ExamType;
+import org.croanna.enums.StatusType;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +16,8 @@ import java.time.LocalDateTime;
 public class ExamDTO {
     private Long id;
     private LocalDateTime date;
+    private StatusType status;
     private ExamType type;
-    private DriverDTO driver;
-    private InstructorDTO instructor;
-
+    private Long driverId;
+    private Long instructorId;
 }

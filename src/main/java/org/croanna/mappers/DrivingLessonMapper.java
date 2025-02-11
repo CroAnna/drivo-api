@@ -11,12 +11,6 @@ import org.croanna.repositories.InstructorRepository;
 public class DrivingLessonMapper {
 
     @Inject
-    DriverMapper driverMapper;
-
-    @Inject
-    InstructorMapper instructorMapper;
-
-    @Inject
     DriverRepository driverRepository;
 
     @Inject

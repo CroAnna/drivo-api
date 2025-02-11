@@ -2,10 +2,8 @@ package org.croanna.resources;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.QueryParam;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.croanna.dtos.ExamDTO;
 import org.croanna.responses.PaginatedResponse;
@@ -31,5 +29,13 @@ public class ExamResource {
         long total = examService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(exams, total, page, size)).build();
+    }
+
+    @POST
+    public Response addExam(@Valid ExamDTO dto) {
+        ExamDTO newExam = examService.createExam(dto);
+        return Response.status(Response.Status.CREATED)
+                .entity(newExam)
+                .build();
     }
 }
