@@ -37,10 +37,7 @@ public class CategoryRepository {
     }
 
     public Category findById(Long id) {
-        return em.createQuery("SELECT c FROM Category c WHERE c.id = :id", Category.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        return em.find(Category.class, id);
     }
-
-
+    
 }

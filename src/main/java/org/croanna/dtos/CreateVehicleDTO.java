@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class VehicleDTO {
+public class CreateVehicleDTO {
     private Long id;
 
     @NotNull(message = "Licence plate cannot be null!")

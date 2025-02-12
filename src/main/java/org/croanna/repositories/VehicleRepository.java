@@ -28,4 +28,14 @@ public class VehicleRepository {
         em.persist(vehicle);
         return vehicle;
     }
+
+    public Vehicle update(Vehicle vehicle) {
+        em.merge(vehicle);
+        return vehicle;
+    }
+
+    public Vehicle findById(Long id) {
+        return em.find(Vehicle.class, id);
+    }
+
 }

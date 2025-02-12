@@ -1,14 +1,15 @@
 package org.croanna.mappers;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.croanna.dtos.VehicleDTO;
+import org.croanna.dtos.CreateVehicleDTO;
+import org.croanna.dtos.VehicleResponseDTO;
 import org.croanna.models.Vehicle;
 
 @ApplicationScoped
 public class VehicleMapper {
 
-    public VehicleDTO toDTO(Vehicle vehicle) {
-        return new VehicleDTO(
+    public VehicleResponseDTO toResponseDTO(Vehicle vehicle) {
+        return new VehicleResponseDTO(
                 vehicle.getId(),
                 vehicle.getLicencePlate(),
                 vehicle.getModel(),
@@ -16,7 +17,7 @@ public class VehicleMapper {
         );
     }
 
-    public Vehicle toModel(VehicleDTO vehicle) {
+    public Vehicle toModel(CreateVehicleDTO vehicle) {
         return new Vehicle(
                 vehicle.getId(),
                 vehicle.getLicencePlate(),
@@ -24,4 +25,6 @@ public class VehicleMapper {
                 vehicle.getYear()
         );
     }
+
+
 }

@@ -5,7 +5,9 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.croanna.dtos.VehicleDTO;
+import org.croanna.dtos.CreateVehicleDTO;
+import org.croanna.dtos.UpdateVehicleDTO;
+import org.croanna.dtos.VehicleResponseDTO;
 import org.croanna.responses.PaginatedResponse;
 import org.croanna.services.VehicleService;
 
@@ -25,17 +27,25 @@ public class VehicleResource {
             @QueryParam("size") @DefaultValue("10") int size
     ) {
         int zeroBasedPage = page - 1;
-        List<VehicleDTO> vehicles = vehicleService.getAllVehicles(zeroBasedPage, size);
+        List<VehicleResponseDTO> vehicles = vehicleService.getAllVehicles(zeroBasedPage, size);
         long total = vehicleService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(vehicles, total, page, size)).build();
     }
 
     @POST
-    public Response addVehicle(@Valid VehicleDTO dto) {
-        VehicleDTO newVehicle = vehicleService.createVehicle(dto);
+    public Response addVehicle(@Valid CreateVehicleDTO dto) {
+        VehicleResponseDTO newVehicle = vehicleService.createVehicle(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(newVehicle)
+                .build();
+    }
+
+    @PATCH
+    @Path("/{id}")
+    public Response updateVehicle(@PathParam("id") Long id, @Valid UpdateVehicleDTO dto) {
+        VehicleResponseDTO updatedVehicle = vehicleService.updateVehicle(id, dto);
+        return Response.ok(updatedVehicle)
                 .build();
     }
 }
