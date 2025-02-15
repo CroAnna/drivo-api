@@ -38,4 +38,11 @@ public class VehicleRepository {
         return em.find(Vehicle.class, id);
     }
 
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM Vehicle v WHERE v.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+
 }

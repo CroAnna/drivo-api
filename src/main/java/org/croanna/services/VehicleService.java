@@ -56,4 +56,9 @@ public class VehicleService {
         vehicle = repository.update(vehicle);
         return mapper.toResponseDTO(vehicle);
     }
+
+    @Transactional
+    public void deleteVehicle(Long id) {
+        repository.delete(id);
+    }
 }

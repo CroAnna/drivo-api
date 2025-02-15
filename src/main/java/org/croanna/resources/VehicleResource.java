@@ -48,4 +48,11 @@ public class VehicleResource {
         return Response.ok(updatedVehicle)
                 .build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteVehicle(@PathParam("id") Long id) {
+        vehicleService.deleteVehicle(id);
+        return Response.ok().build();
+    }
 }
