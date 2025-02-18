@@ -2,7 +2,8 @@ package org.croanna.mappers;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.croanna.dtos.CategoryDTO;
+import org.croanna.dtos.CategoryResponseDTO;
+import org.croanna.dtos.CreateCategoryDTO;
 import org.croanna.models.Category;
 import org.croanna.models.Instructor;
 import org.croanna.services.InstructorService;
@@ -16,8 +17,8 @@ public class CategoryMapper {
     @Inject
     InstructorService instructorService;
 
-    public CategoryDTO toDTO(Category category) {
-        return new CategoryDTO(
+    public CategoryResponseDTO toResponseDTO(Category category) {
+        return new CategoryResponseDTO(
                 category.getId(),
                 category.getTitle(),
                 category.getDescription(),
@@ -26,7 +27,7 @@ public class CategoryMapper {
         );
     }
 
-    public Category toModel(CategoryDTO category) {
+    public Category toModel(CreateCategoryDTO category) {
         Long categoryId = category.getId();
         Set<Instructor> instructors = new HashSet<>(instructorService.getAllInstructorsByCategory(categoryId));
 

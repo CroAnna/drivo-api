@@ -37,7 +37,25 @@ public class CategoryRepository {
     }
 
     public Category findById(Long id) {
-        return em.find(Category.class, id);
+        return em.createQuery("SELECT c FROM Category c WHERE c.id = :id", Category.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
-    
+
+    public Category save(Category category) {
+        em.persist(category);
+        return category;
+    }
+
+    public Category update(Category category) {
+        em.merge(category);
+        return category;
+    }
+
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM Category c WHERE c.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
 }

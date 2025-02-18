@@ -32,6 +32,11 @@ public class VehicleService {
         return repository.count();
     }
 
+    public VehicleResponseDTO getVehicleById(Long id) {
+        Vehicle vehicle = repository.findById(id);
+        return mapper.toResponseDTO(vehicle);
+    }
+
     @Transactional
     public VehicleResponseDTO createVehicle(CreateVehicleDTO dto) {
         Vehicle vehicle = mapper.toModel(dto);

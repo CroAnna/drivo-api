@@ -19,14 +19,16 @@ public class Category {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String description;
 
-    @Column(name = "required_hours")
+    @Column(name = "required_hours", nullable = false)
     private Integer requiredHours;
 
-    @Column(name = "minimal_age")
+    @Column(name = "minimal_age", nullable = false)
     private Integer minimalAge;
 
     @ManyToMany(mappedBy = "categories")

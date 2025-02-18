@@ -35,7 +35,9 @@ public class VehicleRepository {
     }
 
     public Vehicle findById(Long id) {
-        return em.find(Vehicle.class, id);
+        return em.createQuery("SELECT v FROM Vehicle v WHERE v.id = :id", Vehicle.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 
     public void delete(Long id) {

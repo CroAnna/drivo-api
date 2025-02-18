@@ -33,6 +33,13 @@ public class VehicleResource {
         return Response.ok(new PaginatedResponse<>(vehicles, total, page, size)).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response getVehicle(@PathParam("id") Long id) {
+        VehicleResponseDTO vehicle = vehicleService.getVehicleById(id);
+        return Response.ok(vehicle).build();
+    }
+
     @POST
     public Response addVehicle(@Valid CreateVehicleDTO dto) {
         VehicleResponseDTO newVehicle = vehicleService.createVehicle(dto);
