@@ -21,10 +21,10 @@ public class Driver {
     private String name;
 
     @Column(name = "passed_practical_test")
-    private boolean passedPracticalTest = false;
+    private Boolean passedPracticalTest = false;
 
     @Column(name = "passed_theory_test")
-    private boolean passedTheoryTest = false;
+    private Boolean passedTheoryTest = false;
 
     @Column(name = "hours_driven")
     private Integer hoursDriven;

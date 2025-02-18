@@ -2,7 +2,8 @@ package org.croanna.mappers;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.croanna.dtos.DriverDTO;
+import org.croanna.dtos.CreateDriverDTO;
+import org.croanna.dtos.DriverResponseDTO;
 import org.croanna.models.Driver;
 import org.croanna.repositories.CategoryRepository;
 
@@ -12,24 +13,24 @@ public class DriverMapper {
     @Inject
     CategoryRepository categoryRepository;
 
-    public DriverDTO toDTO(Driver driver) {
-        return new DriverDTO(
+    public DriverResponseDTO toResponseDTO(Driver driver) {
+        return new DriverResponseDTO(
                 driver.getId(),
                 driver.getName(),
-                driver.isPassedPracticalTest(),
-                driver.isPassedTheoryTest(),
+                driver.getPassedPracticalTest(),
+                driver.getPassedTheoryTest(),
                 driver.getHoursDriven(),
                 driver.getPhone(),
                 driver.getCategory() != null ? driver.getCategory().getId() : null
         );
     }
 
-    public Driver toModel(DriverDTO driver) {
+    public Driver toModel(CreateDriverDTO driver) {
         return new Driver(
                 driver.getId(),
                 driver.getName(),
-                driver.isPassedPracticalTest(),
-                driver.isPassedTheoryTest(),
+                driver.getPassedPracticalTest(),
+                driver.getPassedTheoryTest(),
                 driver.getHoursDriven(),
                 driver.getPhone(),
                 driver.getCategoryId() != null ?

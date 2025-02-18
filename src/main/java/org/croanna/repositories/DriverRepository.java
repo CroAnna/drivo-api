@@ -35,4 +35,15 @@ public class DriverRepository {
                 .getSingleResult();
     }
 
+    public Driver update(Driver driver) {
+        em.merge(driver);
+        return driver;
+    }
+
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM Driver d WHERE d.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
 }

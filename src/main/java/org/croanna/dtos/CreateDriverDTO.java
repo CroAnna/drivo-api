@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DriverDTO {
+public class CreateDriverDTO {
     private Long id;
 
     @NotNull(message = "Name cannot be null!")
