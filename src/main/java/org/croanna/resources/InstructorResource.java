@@ -5,7 +5,9 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.croanna.dtos.InstructorDTO;
+import org.croanna.dtos.CreateInstructorDTO;
+import org.croanna.dtos.InstructorResponseDTO;
+import org.croanna.dtos.UpdateInstructorDTO;
 import org.croanna.responses.PaginatedResponse;
 import org.croanna.services.InstructorService;
 
@@ -26,18 +28,40 @@ public class InstructorResource {
             @QueryParam("category_id") Long categoryId
     ) {
         int zeroBasedPage = page - 1;
-        List<InstructorDTO> instructors = instructorService.getAllInstructors(zeroBasedPage, size, categoryId);
+        List<InstructorResponseDTO> instructors = instructorService.getAllInstructors(zeroBasedPage, size, categoryId);
         long total = instructorService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(instructors, total, page, size)).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response getInstructor(@PathParam("id") Long id) {
+        InstructorResponseDTO instructor = instructorService.getInstructorById(id);
+        return Response.ok(instructor).build();
+    }
+
     @POST
-    public Response addInstructor(@Valid InstructorDTO dto) {
-        InstructorDTO newInstructor = instructorService.createInstructor(dto);
+    public Response addInstructor(@Valid CreateInstructorDTO dto) {
+        InstructorResponseDTO newInstructor = instructorService.createInstructor(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(newInstructor)
                 .build();
+    }
+
+    @PATCH
+    @Path("/{id}")
+    public Response updateInstructor(@PathParam("id") Long id, @Valid UpdateInstructorDTO dto) {
+        InstructorResponseDTO updatedInstructor = instructorService.updateInstructor(id, dto);
+        return Response.ok(updatedInstructor)
+                .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteInstructor(@PathParam("id") Long id) {
+        instructorService.deleteInstructor(id);
+        return Response.ok().build();
     }
 
 }

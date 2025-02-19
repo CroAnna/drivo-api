@@ -46,4 +46,15 @@ public class InstructorRepository {
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    public Instructor update(Instructor instructor) {
+        em.merge(instructor);
+        return instructor;
+    }
+
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM Instructor i WHERE i.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }
