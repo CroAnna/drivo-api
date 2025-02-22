@@ -2,7 +2,8 @@ package org.croanna.mappers;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.croanna.dtos.ExamDTO;
+import org.croanna.dtos.CreateExamDTO;
+import org.croanna.dtos.ExamResponseDTO;
 import org.croanna.models.Exam;
 import org.croanna.repositories.DriverRepository;
 import org.croanna.repositories.InstructorRepository;
@@ -16,8 +17,8 @@ public class ExamMapper {
     @Inject
     InstructorRepository instructorRepository;
 
-    public ExamDTO toDTO(Exam exam) {
-        return new ExamDTO(
+    public ExamResponseDTO toResponseDTO(Exam exam) {
+        return new ExamResponseDTO(
                 exam.getId(),
                 exam.getDate(),
                 exam.getStatus(),
@@ -27,7 +28,7 @@ public class ExamMapper {
         );
     }
 
-    public Exam toModel(ExamDTO exam) {
+    public Exam toModel(CreateExamDTO exam) {
         return new Exam(
                 exam.getId(),
                 exam.getDate(),

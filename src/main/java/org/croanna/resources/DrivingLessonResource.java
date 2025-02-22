@@ -5,7 +5,9 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.croanna.dtos.DrivingLessonDTO;
+import org.croanna.dtos.CreateDrivingLessonDTO;
+import org.croanna.dtos.DrivingLessonResponseDTO;
+import org.croanna.dtos.UpdateDrivingLessonDTO;
 import org.croanna.responses.PaginatedResponse;
 import org.croanna.services.DrivingLessonService;
 
@@ -25,17 +27,39 @@ public class DrivingLessonResource {
             @QueryParam("size") @DefaultValue("10") int size
     ) {
         int zeroBasedPage = page - 1;
-        List<DrivingLessonDTO> lessons = drivingLessonService.getAllDrivingLessons(zeroBasedPage, size);
+        List<DrivingLessonResponseDTO> lessons = drivingLessonService.getAllDrivingLessons(zeroBasedPage, size);
         long total = drivingLessonService.getTotal();
 
         return Response.ok(new PaginatedResponse<>(lessons, total, page, size)).build();
     }
 
+    @GET
+    @Path("/{id}")
+    public Response getDriver(@PathParam("id") Long id) {
+        DrivingLessonResponseDTO driver = drivingLessonService.getDrivingLessonById(id);
+        return Response.ok(driver).build();
+    }
+
     @POST
-    public Response addDrivingLesson(@Valid DrivingLessonDTO dto) {
-        DrivingLessonDTO newLesson = drivingLessonService.createLesson(dto);
+    public Response addDrivingLesson(@Valid CreateDrivingLessonDTO dto) {
+        DrivingLessonResponseDTO newLesson = drivingLessonService.createDrivingLesson(dto);
         return Response.status(Response.Status.CREATED)
                 .entity(newLesson)
                 .build();
+    }
+
+    @PATCH
+    @Path("/{id}")
+    public Response updateDrivingLesson(@PathParam("id") Long id, @Valid UpdateDrivingLessonDTO dto) {
+        DrivingLessonResponseDTO updatedDriver = drivingLessonService.updateDrivingLesson(id, dto);
+        return Response.ok(updatedDriver)
+                .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteDrivingLesson(@PathParam("id") Long id) {
+        drivingLessonService.deleteDrivingLesson(id);
+        return Response.ok().build();
     }
 }

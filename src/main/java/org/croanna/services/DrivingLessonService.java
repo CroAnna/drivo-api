@@ -3,10 +3,14 @@ package org.croanna.services;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import org.croanna.dtos.DrivingLessonDTO;
+import org.croanna.dtos.CreateDrivingLessonDTO;
+import org.croanna.dtos.DrivingLessonResponseDTO;
+import org.croanna.dtos.UpdateDrivingLessonDTO;
 import org.croanna.mappers.DrivingLessonMapper;
 import org.croanna.models.DrivingLesson;
+import org.croanna.repositories.DriverRepository;
 import org.croanna.repositories.DrivingLessonRepository;
+import org.croanna.repositories.InstructorRepository;
 
 import java.util.List;
 
@@ -17,13 +21,24 @@ public class DrivingLessonService {
     DrivingLessonRepository repository;
 
     @Inject
+    DriverRepository driverRepository;
+
+    @Inject
+    InstructorRepository instructorRepository;
+
+    @Inject
     DrivingLessonMapper mapper;
 
-    public List<DrivingLessonDTO> getAllDrivingLessons(int page, int size) {
+    public List<DrivingLessonResponseDTO> getAllDrivingLessons(int page, int size) {
         return repository.findAll(page, size)
                 .stream()
-                .map(mapper::toDTO)
+                .map(mapper::toResponseDTO)
                 .toList();
+    }
+
+    public DrivingLessonResponseDTO getDrivingLessonById(Long id) {
+        DrivingLesson lesson = repository.findById(id);
+        return mapper.toResponseDTO(lesson);
     }
 
     public Long getTotal() {
@@ -31,9 +46,43 @@ public class DrivingLessonService {
     }
 
     @Transactional
-    public DrivingLessonDTO createLesson(DrivingLessonDTO dto) {
+    public DrivingLessonResponseDTO createDrivingLesson(CreateDrivingLessonDTO dto) {
         DrivingLesson lesson = mapper.toModel(dto);
         lesson = repository.save(lesson);
-        return mapper.toDTO(lesson);
+        return mapper.toResponseDTO(lesson);
+    }
+
+    @Transactional
+    public DrivingLessonResponseDTO updateDrivingLesson(Long id, UpdateDrivingLessonDTO dto) {
+        DrivingLesson lesson = repository.findById(id);
+
+        if (dto.getComment() != null) {
+            lesson.setComment(dto.getComment());
+        }
+        if (dto.getLocation() != null) {
+            lesson.setComment(dto.getLocation());
+        }
+        if (dto.getStatus() != null) {
+            lesson.setStatus(dto.getStatus());
+        }
+        if (dto.getStartTime() != null) {
+            lesson.setStartTime(dto.getStartTime());
+        }
+        if (dto.getEndTime() != null) {
+            lesson.setEndTime(dto.getEndTime());
+        }
+        if (dto.getDriverId() != null) {
+            lesson.setDriver(driverRepository.findById(dto.getDriverId()));
+        }
+        if (dto.getInstructorId() != null) {
+            lesson.setInstructor(instructorRepository.findById(dto.getInstructorId()));
+        }
+        lesson = repository.update(lesson);
+        return mapper.toResponseDTO(lesson);
+    }
+
+    @Transactional
+    public void deleteDrivingLesson(Long id) {
+        repository.delete(id);
     }
 }

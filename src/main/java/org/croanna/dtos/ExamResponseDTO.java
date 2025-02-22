@@ -1,10 +1,10 @@
 package org.croanna.dtos;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.croanna.enums.ExamType;
 import org.croanna.enums.StatusType;
 
 import java.time.LocalDateTime;
@@ -13,17 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DrivingLessonDTO {
+public class ExamResponseDTO {
     private Long id;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private String location;
-    private String comment;
+    private LocalDateTime date;
     private StatusType status;
-
-    @NotNull(message = "Driver ID cannot be null!")
+    private ExamType type;
     private Long driverId;
-
-    @NotNull(message = "Instructor ID cannot be null!")
     private Long instructorId;
 }

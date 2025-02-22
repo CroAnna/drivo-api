@@ -29,4 +29,21 @@ public class DrivingLessonRepository {
         em.persist(lesson);
         return lesson;
     }
+
+    public DrivingLesson findById(Long id) {
+        return em.createQuery("SELECT d FROM DrivingLesson d WHERE d.id = :id", DrivingLesson.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+    
+    public DrivingLesson update(DrivingLesson lesson) {
+        em.merge(lesson);
+        return lesson;
+    }
+
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM DrivingLesson d WHERE d.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }

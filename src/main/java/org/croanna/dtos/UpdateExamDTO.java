@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ExamDTO {
-    private Long id;
+public class UpdateExamDTO {
     private LocalDateTime date;
     private StatusType status;
     private ExamType type;

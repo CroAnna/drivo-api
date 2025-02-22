@@ -20,14 +20,17 @@ public class DrivingLesson {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private LocalDateTime startTime;
 
+    @Column(nullable = false)
     private LocalDateTime endTime;
 
     private String location;
 
     private String comment;
 
+    @Column(nullable = false)
     private StatusType status;
 
     @ManyToOne

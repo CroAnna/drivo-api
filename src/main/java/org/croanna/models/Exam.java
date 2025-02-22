@@ -21,11 +21,14 @@ public class Exam {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private LocalDateTime date;
-    
+
+    @Column(nullable = false)
     private StatusType status;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ExamType type;
 
     @ManyToOne

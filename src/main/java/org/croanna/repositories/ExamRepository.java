@@ -9,6 +9,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class ExamRepository {
+
     @PersistenceContext
     EntityManager em;
 
@@ -27,5 +28,22 @@ public class ExamRepository {
     public Exam save(Exam exam) {
         em.persist(exam);
         return exam;
+    }
+
+    public Exam findById(Long id) {
+        return em.createQuery("SELECT e FROM Exam e WHERE e.id = :id", Exam.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    public Exam update(Exam exam) {
+        em.merge(exam);
+        return exam;
+    }
+
+    public void delete(Long id) {
+        em.createQuery("DELETE FROM Exam e WHERE e.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }
