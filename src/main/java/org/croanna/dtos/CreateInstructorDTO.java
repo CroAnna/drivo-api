@@ -25,4 +25,12 @@ public class CreateInstructorDTO {
     @NotNull(message = "Availability cannot be null!")
     @NotBlank(message = "Availability cannot be blank!")
     private String availability;
+
+    @NotNull(message = "Username cannot be null!")
+    @NotBlank(message = "Username cannot be blank!")
+    private String username;
+
+    @NotNull(message = "Password cannot be null!")
+    @NotBlank(message = "Password cannot be blank!")
+    private String password;
 }

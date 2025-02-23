@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.croanna.enums.RoleType;
 
 import java.util.Set;
 
@@ -14,17 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Instructor {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String phone;
-
+public class Instructor extends Employee {
     @Column(nullable = false)
     private String availability;
 
@@ -35,4 +26,10 @@ public class Instructor {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories;
+
+    public Instructor(Long id, String username, String password, String name, String phone, String availability, Set<Category> categories) {
+        super(id, username, password, name, phone, RoleType.INSTRUCTOR);
+        this.availability = availability;
+        this.categories = categories;
+    }
 }

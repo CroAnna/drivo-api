@@ -35,6 +35,8 @@ public class InstructorMapper {
 
         return new Instructor(
                 instructor.getId(),
+                instructor.getUsername(),
+                instructor.getPassword(),
                 instructor.getName(),
                 instructor.getPhone(),
                 instructor.getAvailability(),

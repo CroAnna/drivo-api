@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.croanna.enums.ExamType;
+import org.croanna.enums.RoleType;
 import org.croanna.enums.StatusType;
 import org.croanna.models.*;
 
@@ -36,8 +37,9 @@ public class DatabaseSeeder {
         Vehicle vehicle1 = createVehicle("ZG122PP", "Audi A3", 2022);
         Vehicle vehicle2 = createVehicle("KA787SR", "BMW X6", 2020);
 
-        Instructor instructor1 = createInstructor("Stjepan Bukvic", "+385911441414", "16:00-21:00", Set.of(categoryB));
-        Instructor instructor2 = createInstructor("Mislav Nortic", "+385987654321", "09:00-17:00", Set.of(categoryA, categoryB));
+        Employee employee1 = createEmployee("Natalija Kokolic", "nkokolic", "12345678", "+38596381414", RoleType.EMPLOYEE);
+        Instructor instructor1 = createInstructor("Stjepan Bukvic", "sbukvic", "12345678", "+385911441414", "16:00-21:00", Set.of(categoryB));
+        Instructor instructor2 = createInstructor("Mislav Nortic", "mnortic", "12345678", "+385987654321", "09:00-17:00", Set.of(categoryA, categoryB));
 
         Driver driver1 = createDriver("Ana Sporost", "+38591111442", categoryB, 10, false, false);
         Driver driver2 = createDriver("Rajko Brzic", "+38591881442", categoryA, 20, true, false);
@@ -71,14 +73,28 @@ public class DatabaseSeeder {
         return vehicle;
     }
 
-    private Instructor createInstructor(String name, String phone, String availability, Set<Category> categories) {
+    private Instructor createInstructor(String name, String username, String password, String phone, String availability, Set<Category> categories) {
         Instructor instructor = new Instructor();
         instructor.setName(name);
         instructor.setPhone(phone);
         instructor.setAvailability(availability);
         instructor.setCategories(categories);
+        instructor.setUsername(username);
+        instructor.setPassword(password);
+        instructor.setRole(RoleType.INSTRUCTOR);
         em.persist(instructor);
         return instructor;
+    }
+
+    private Employee createEmployee(String name, String username, String password, String phone, RoleType role) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setPhone(phone);
+        employee.setRole(role);
+        employee.setUsername(username);
+        employee.setPassword(password);
+        em.persist(employee);
+        return employee;
     }
 
     private Driver createDriver(String name, String phone, Category category, int hoursDriven, boolean passedTheory, boolean passedPractical) {
