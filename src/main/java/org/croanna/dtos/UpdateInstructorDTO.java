@@ -13,4 +13,6 @@ public class UpdateInstructorDTO {
     private String name;
     private String phone;
     private String availability;
+    private String password;
+    private String username;
 }

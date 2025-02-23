@@ -61,7 +61,13 @@ public class InstructorService {
         if (dto.getAvailability() != null) {
             instructor.setAvailability(dto.getAvailability());
         }
-
+        if (dto.getUsername() != null) {
+            instructor.setUsername(dto.getUsername());
+        }
+        if (dto.getPassword() != null) {
+            instructor.setPassword(dto.getPassword());
+        }
+        
         instructor = repository.update(instructor);
         return mapper.toResponseDTO(instructor);
     }
