@@ -1,5 +1,7 @@
 package org.croanna.resources;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -13,6 +15,7 @@ import org.croanna.services.DrivingLessonService;
 
 import java.util.List;
 
+@PermitAll
 @Path("/api/driving-lessons")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -22,6 +25,7 @@ public class DrivingLessonResource {
     DrivingLessonService drivingLessonService;
 
     @GET
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getAllDrivingLessons(
             @QueryParam("page") @DefaultValue("1") int page,
             @QueryParam("size") @DefaultValue("10") int size
@@ -35,12 +39,14 @@ public class DrivingLessonResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getDriver(@PathParam("id") Long id) {
         DrivingLessonResponseDTO driver = drivingLessonService.getDrivingLessonById(id);
         return Response.ok(driver).build();
     }
 
     @POST
+    @RolesAllowed({"ADMIN", "INSTRUCTOR"})
     public Response addDrivingLesson(@Valid CreateDrivingLessonDTO dto) {
         DrivingLessonResponseDTO newLesson = drivingLessonService.createDrivingLesson(dto);
         return Response.status(Response.Status.CREATED)
@@ -50,6 +56,7 @@ public class DrivingLessonResource {
 
     @PATCH
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "INSTRUCTOR"})
     public Response updateDrivingLesson(@PathParam("id") Long id, @Valid UpdateDrivingLessonDTO dto) {
         DrivingLessonResponseDTO updatedDriver = drivingLessonService.updateDrivingLesson(id, dto);
         return Response.ok(updatedDriver)
@@ -58,6 +65,7 @@ public class DrivingLessonResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "INSTRUCTOR"})
     public Response deleteDrivingLesson(@PathParam("id") Long id) {
         drivingLessonService.deleteDrivingLesson(id);
         return Response.ok().build();

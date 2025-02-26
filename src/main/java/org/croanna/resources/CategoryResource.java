@@ -1,5 +1,7 @@
 package org.croanna.resources;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -13,6 +15,7 @@ import org.croanna.services.CategoryService;
 
 import java.util.List;
 
+@PermitAll
 @Path("/api/categories")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,6 +24,7 @@ public class CategoryResource {
     CategoryService categoryService;
 
     @GET
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getAllCategories(
             @QueryParam("page") @DefaultValue("1") int page,
             @QueryParam("size") @DefaultValue("10") int size,
@@ -35,12 +39,14 @@ public class CategoryResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getCategory(@PathParam("id") Long id) {
         CategoryResponseDTO category = categoryService.getCategoryById(id);
         return Response.ok(category).build();
     }
 
     @POST
+    @RolesAllowed({"ADMIN"})
     public Response addCategory(@Valid CreateCategoryDTO dto) {
         CategoryResponseDTO newCategory = categoryService.createCategory(dto);
         return Response.status(Response.Status.CREATED)
@@ -50,6 +56,7 @@ public class CategoryResource {
 
     @PATCH
     @Path("/{id}")
+    @RolesAllowed({"ADMIN"})
     public Response updateCategory(@PathParam("id") Long id, @Valid UpdateCategoryDTO dto) {
         CategoryResponseDTO updatedCategory = categoryService.updateCategory(id, dto);
         return Response.ok(updatedCategory)
@@ -58,6 +65,7 @@ public class CategoryResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMIN"})
     public Response deleteCategory(@PathParam("id") Long id) {
         categoryService.deleteCategory(id);
         return Response.ok().build();

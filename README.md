@@ -1,6 +1,7 @@
 # Drivo
 
-This is an API for driving school management dashboard system built using Quarkus, the Supersonic Subatomic Java Framework.
+This is an API for driving school management dashboard system built using Quarkus, the Supersonic Subatomic Java
+Framework.
 
 ## ER model
 
@@ -10,6 +11,19 @@ This is an API for driving school management dashboard system built using Quarku
 
 ![architecture](https://github.com/user-attachments/assets/830d65bd-29e6-4db3-adb8-cad88f002a56)
 
+## Project setup
+
+Before starting the project you must create public and private keys:
+
+``cd src/main/resources/``
+
+Generate private key:
+
+``openssl genpkey -algorithm RSA -out privateKey.pem``
+
+Generate public key:
+
+``openssl rsa -in privateKey.pem -pubout -out publicKey.pem``
 
 ## Running the application in dev mode
 

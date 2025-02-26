@@ -1,5 +1,7 @@
 package org.croanna.resources;
 
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -14,6 +16,7 @@ import org.croanna.services.ExamService;
 
 import java.util.List;
 
+@PermitAll
 @Path("/api/exams")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -24,6 +27,7 @@ public class ExamResource {
     ExamService examService;
 
     @GET
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getAllExams(
             @QueryParam("page") @DefaultValue("1") int page,
             @QueryParam("size") @DefaultValue("10") int size
@@ -37,12 +41,14 @@ public class ExamResource {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response getExam(@PathParam("id") Long id) {
         ExamResponseDTO exam = examService.getExamById(id);
         return Response.ok(exam).build();
     }
 
     @POST
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response addExam(@Valid CreateExamDTO dto) {
         ExamResponseDTO newExam = examService.createExam(dto);
         return Response.status(Response.Status.CREATED)
@@ -52,6 +58,7 @@ public class ExamResource {
 
     @PATCH
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response updateExam(@PathParam("id") Long id, @Valid UpdateExamDTO dto) {
         ExamResponseDTO updatedDriver = examService.updateExam(id, dto);
         return Response.ok(updatedDriver)
@@ -60,6 +67,7 @@ public class ExamResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"ADMIN", "EMPLOYEE", "INSTRUCTOR"})
     public Response deleteExam(@PathParam("id") Long id) {
         examService.deleteExam(id);
         return Response.ok().build();
