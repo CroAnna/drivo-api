@@ -28,7 +28,7 @@ public class EmployeeResource {
     public Response login(@Valid final LoginDTO loginDto) {
         if (employeeService.checkUserCredentials(loginDto.getUsername(), loginDto.getPassword())) {
             String token = employeeService.getJwtToken(loginDto.getUsername());
-            return Response.ok().entity(new TokenResponse("Bearer " + token, "3600")).build();
+            return Response.ok().entity(new TokenResponse(token, "3600")).build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED).entity(new MessageResponse("Invalid credentials")).build();
         }
