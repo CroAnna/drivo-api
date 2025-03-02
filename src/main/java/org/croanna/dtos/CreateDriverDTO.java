@@ -18,9 +18,9 @@ public class CreateDriverDTO {
     @NotBlank(message = "Name cannot be blank!")
     private String name;
 
-    private Boolean passedPracticalTest;
+    private Boolean passedPracticalTest = false;
 
-    private Boolean passedTheoryTest;
+    private Boolean passedTheoryTest = false;
 
     private Integer hoursDriven;
 
