@@ -10,6 +10,7 @@ import org.croanna.services.CategoryService;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class InstructorMapper {
@@ -22,7 +23,12 @@ public class InstructorMapper {
                 instructor.getId(),
                 instructor.getName(),
                 instructor.getPhone(),
-                instructor.getAvailability()
+                instructor.getUsername(),
+                instructor.getRole(),
+                instructor.getAvailability(),
+                instructor.getCategories().stream()
+                        .map(category -> category.getTitle())
+                        .collect(Collectors.toSet())
         );
     }
 
