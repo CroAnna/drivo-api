@@ -15,9 +15,6 @@ import java.util.Set;
 public class InstructorMapper {
 
     @Inject
-    InstructorMapper instructorMapper;
-
-    @Inject
     CategoryService categoryService;
 
     public InstructorResponseDTO toResponseDTO(Instructor instructor) {
