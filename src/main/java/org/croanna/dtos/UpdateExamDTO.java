@@ -18,5 +18,5 @@ public class UpdateExamDTO {
     private StatusType status;
     private ExamType type;
     private Long driverId;
-    private Long instructorId;
+    private Long employeeId;
 }

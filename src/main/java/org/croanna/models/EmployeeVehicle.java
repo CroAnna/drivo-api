@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "instructor_vehicle")
+@Table(name = "employee_vehicle")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class InstructorVehicle {
+public class EmployeeVehicle {
     @Id
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     @Id
     @ManyToOne

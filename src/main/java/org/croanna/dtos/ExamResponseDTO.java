@@ -19,5 +19,5 @@ public class ExamResponseDTO {
     private StatusType status;
     private ExamType type;
     private Long driverId;
-    private Long instructorId;
+    private Long employeeId;
 }

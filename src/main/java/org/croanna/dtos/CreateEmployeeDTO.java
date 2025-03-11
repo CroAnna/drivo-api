@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.croanna.enums.RoleType;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -35,5 +37,7 @@ public class CreateEmployeeDTO {
     private RoleType role;
 
     private String availability;
+
+    private Set<String> categories;
 }
 

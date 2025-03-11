@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.croanna.enums.RoleType;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,4 +19,5 @@ public class UpdateEmployeeDTO {
     private String password;
     private String username;
     private RoleType role;
+    private Set<String> categories;
 }

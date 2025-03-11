@@ -5,8 +5,8 @@ import jakarta.inject.Inject;
 import org.croanna.dtos.CategoryResponseDTO;
 import org.croanna.dtos.CreateCategoryDTO;
 import org.croanna.models.Category;
-import org.croanna.models.Instructor;
-import org.croanna.services.InstructorService;
+import org.croanna.models.Employee;
+import org.croanna.services.EmployeeService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class CategoryMapper {
 
     @Inject
-    InstructorService instructorService;
+    EmployeeService employeeService;
 
     public CategoryResponseDTO toResponseDTO(Category category) {
         return new CategoryResponseDTO(
@@ -29,7 +29,7 @@ public class CategoryMapper {
 
     public Category toModel(CreateCategoryDTO category) {
         Long categoryId = category.getId();
-        Set<Instructor> instructors = new HashSet<>(instructorService.getAllInstructorsByCategory(categoryId));
+        Set<Employee> employees = new HashSet<>(employeeService.getAllEmployeesByCategory(categoryId));
 
         return new Category(
                 category.getId(),
@@ -37,7 +37,7 @@ public class CategoryMapper {
                 category.getDescription(),
                 category.getRequiredHours(),
                 category.getMinimalAge(),
-                instructors
+                employees
         );
     }
 }

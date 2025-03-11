@@ -11,6 +11,9 @@ import org.croanna.models.Category;
 import org.croanna.repositories.CategoryRepository;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class CategoryService {
@@ -39,6 +42,16 @@ public class CategoryService {
 
     public List<Category> getAllCategoriesByInstructor(Long instructorId) {
         return repository.findAll(1, 1000, instructorId).stream().toList();
+    }
+
+    public Set<Category> getCategoriesDataByTitle(Set<String> titles) {
+        if (titles == null || titles.isEmpty()) {
+            return Set.of();
+        }
+        return titles.stream()
+                .map(repository::findByTitle)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     @Transactional

@@ -6,7 +6,7 @@ import org.croanna.dtos.CreateExamDTO;
 import org.croanna.dtos.ExamResponseDTO;
 import org.croanna.models.Exam;
 import org.croanna.repositories.DriverRepository;
-import org.croanna.repositories.InstructorRepository;
+import org.croanna.repositories.EmployeeRepository;
 
 @ApplicationScoped
 public class ExamMapper {
@@ -15,7 +15,7 @@ public class ExamMapper {
     DriverRepository driverRepository;
 
     @Inject
-    InstructorRepository instructorRepository;
+    EmployeeRepository employeeRepository;
 
     public ExamResponseDTO toResponseDTO(Exam exam) {
         return new ExamResponseDTO(
@@ -24,7 +24,7 @@ public class ExamMapper {
                 exam.getStatus(),
                 exam.getType(),
                 exam.getDriver() != null ? exam.getDriver().getId() : null,
-                exam.getInstructor() != null ? exam.getInstructor().getId() : null
+                exam.getEmployee() != null ? exam.getEmployee().getId() : null
         );
     }
 
@@ -35,7 +35,7 @@ public class ExamMapper {
                 exam.getStatus(),
                 exam.getType(),
                 driverRepository.findById(exam.getDriverId()),
-                instructorRepository.findById(exam.getInstructorId())
+                employeeRepository.findById(exam.getEmployeeId())
         );
     }
 }

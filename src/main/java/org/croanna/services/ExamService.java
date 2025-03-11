@@ -9,8 +9,8 @@ import org.croanna.dtos.UpdateExamDTO;
 import org.croanna.mappers.ExamMapper;
 import org.croanna.models.Exam;
 import org.croanna.repositories.DriverRepository;
+import org.croanna.repositories.EmployeeRepository;
 import org.croanna.repositories.ExamRepository;
-import org.croanna.repositories.InstructorRepository;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ExamService {
     DriverRepository driverRepository;
 
     @Inject
-    InstructorRepository instructorRepository;
+    EmployeeRepository employeeRepository;
 
     @Inject
     ExamMapper mapper;
@@ -68,8 +68,8 @@ public class ExamService {
         if (dto.getDriverId() != null) {
             exam.setDriver(driverRepository.findById(dto.getDriverId()));
         }
-        if (dto.getInstructorId() != null) {
-            exam.setInstructor(instructorRepository.findById(dto.getInstructorId()));
+        if (dto.getEmployeeId() != null) {
+            exam.setEmployee(employeeRepository.findById(dto.getEmployeeId()));
         }
         exam = repository.update(exam);
         return mapper.toResponseDTO(exam);

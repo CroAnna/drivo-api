@@ -42,6 +42,12 @@ public class CategoryRepository {
                 .getSingleResult();
     }
 
+    public Category findByTitle(String title) {
+        return em.createQuery("SELECT c FROM Category c WHERE c.title = :title", Category.class)
+                .setParameter("title", title)
+                .getSingleResult();
+    }
+
     public Category save(Category category) {
         em.persist(category);
         return category;

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.croanna.enums.RoleType;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "employees")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,4 +36,15 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoleType role;
+
+    @Column()
+    private String availability;
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_categories",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 }

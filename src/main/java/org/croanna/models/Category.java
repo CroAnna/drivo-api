@@ -32,5 +32,5 @@ public class Category {
     private Integer minimalAge;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<Instructor> instructors;
+    private Set<Employee> employees;
 }

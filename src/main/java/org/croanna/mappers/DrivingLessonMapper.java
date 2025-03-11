@@ -6,7 +6,7 @@ import org.croanna.dtos.CreateDrivingLessonDTO;
 import org.croanna.dtos.DrivingLessonResponseDTO;
 import org.croanna.models.DrivingLesson;
 import org.croanna.repositories.DriverRepository;
-import org.croanna.repositories.InstructorRepository;
+import org.croanna.repositories.EmployeeRepository;
 
 @ApplicationScoped
 public class DrivingLessonMapper {
@@ -15,7 +15,7 @@ public class DrivingLessonMapper {
     DriverRepository driverRepository;
 
     @Inject
-    InstructorRepository instructorRepository;
+    EmployeeRepository employeeRepository;
 
     public DrivingLessonResponseDTO toResponseDTO(DrivingLesson lesson) {
         return new DrivingLessonResponseDTO(
@@ -26,7 +26,7 @@ public class DrivingLessonMapper {
                 lesson.getComment(),
                 lesson.getStatus(),
                 lesson.getDriver() != null ? lesson.getDriver().getId() : null,
-                lesson.getInstructor() != null ? lesson.getInstructor().getId() : null
+                lesson.getEmployee() != null ? lesson.getEmployee().getId() : null
         );
     }
 
@@ -39,7 +39,7 @@ public class DrivingLessonMapper {
                 lesson.getComment(),
                 lesson.getStatus(),
                 lesson.getDriverId() != null ? driverRepository.findById(lesson.getDriverId()) : null,
-                lesson.getInstructorId() != null ? instructorRepository.findById(lesson.getInstructorId()) : null
+                lesson.getEmployeeId() != null ? employeeRepository.findById(lesson.getEmployeeId()) : null
         );
     }
 

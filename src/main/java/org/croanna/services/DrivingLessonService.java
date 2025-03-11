@@ -10,7 +10,7 @@ import org.croanna.mappers.DrivingLessonMapper;
 import org.croanna.models.DrivingLesson;
 import org.croanna.repositories.DriverRepository;
 import org.croanna.repositories.DrivingLessonRepository;
-import org.croanna.repositories.InstructorRepository;
+import org.croanna.repositories.EmployeeRepository;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class DrivingLessonService {
     DriverRepository driverRepository;
 
     @Inject
-    InstructorRepository instructorRepository;
+    EmployeeRepository employeeRepository;
 
     @Inject
     DrivingLessonMapper mapper;
@@ -74,8 +74,8 @@ public class DrivingLessonService {
         if (dto.getDriverId() != null) {
             lesson.setDriver(driverRepository.findById(dto.getDriverId()));
         }
-        if (dto.getInstructorId() != null) {
-            lesson.setInstructor(instructorRepository.findById(dto.getInstructorId()));
+        if (dto.getEmployeeId() != null) {
+            lesson.setEmployee(employeeRepository.findById(dto.getEmployeeId()));
         }
         lesson = repository.update(lesson);
         return mapper.toResponseDTO(lesson);

@@ -19,5 +19,5 @@ public class UpdateDrivingLessonDTO {
     private String comment;
     private StatusType status;
     private Long driverId;
-    private Long instructorId;
+    private Long employeeId;
 }

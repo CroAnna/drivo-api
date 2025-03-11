@@ -31,6 +31,6 @@ public class CreateDrivingLessonDTO {
     @NotNull(message = "Driver ID cannot be null!")
     private Long driverId;
 
-    @NotNull(message = "Instructor ID cannot be null!")
-    private Long instructorId;
+    @NotNull(message = "Employee ID cannot be null!")
+    private Long employeeId;
 }

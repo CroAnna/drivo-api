@@ -38,7 +38,7 @@ public class DrivingLesson {
     private Driver driver;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id", nullable = false)
-    private Instructor instructor;
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
 }

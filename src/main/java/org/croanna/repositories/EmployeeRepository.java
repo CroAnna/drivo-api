@@ -3,6 +3,7 @@ package org.croanna.repositories;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.croanna.models.Employee;
 
 import java.util.List;
@@ -17,6 +18,24 @@ public class EmployeeRepository {
                 .setFirstResult(page * size)
                 .setMaxResults(size)
                 .getResultList();
+    }
+
+    public List<Employee> findAll(int page, int size, Long categoryId) {
+        String queryStr = "SELECT e FROM Employee e";
+
+        if (categoryId != null) {
+            queryStr += " JOIN i.categories c WHERE c.id = :categoryId";
+        }
+
+        TypedQuery<Employee> query = em.createQuery(queryStr, Employee.class)
+                .setFirstResult(page * size)
+                .setMaxResults(size);
+
+        if (categoryId != null) {
+            query.setParameter("categoryId", categoryId);
+        }
+
+        return query.getResultList();
     }
 
     public Employee findByUsername(String username) {

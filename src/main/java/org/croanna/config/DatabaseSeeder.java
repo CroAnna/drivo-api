@@ -57,7 +57,7 @@ public class DatabaseSeeder {
         Vehicle vehicle5 = createVehicle("KA785SA", "BMW X5", 2020);
         Vehicle vehicle6 = createVehicle("KA784SA", "BMW X4", 2022);
         Vehicle vehicle7 = createVehicle("KA877IJ", "Renault Clio", 2019);
-        Vehicle vehicle8 = createVehicle("KA784SA", "Honda CBR 600", 2021);
+        Vehicle vehicle8 = createVehicle("KA786BA", "Honda CBR 600", 2021);
         Vehicle vehicle9 = createVehicle("ZG111TT", "Mercedes-Benz Actros", 2023);
         Vehicle vehicle10 = createVehicle("KA222TT", "Volvo FH16", 2022);
         Vehicle vehicle11 = createVehicle("KA333TT", "Scania R730", 2021);
@@ -81,18 +81,18 @@ public class DatabaseSeeder {
         Employee employee11 = createEmployee("Mateo Prgomet", "mprgomet", "12345678", "+385917654321", RoleType.EMPLOYEE);
         Employee employee12 = createEmployee("Valentina Jovic", "vjovic", "12345678", "+385955443322", RoleType.EMPLOYEE);
 
-        Instructor instructor1 = createInstructor("Stjepan Bukvic", "sbukvic", "12345678", "+385911441414", "16:00-21:00", Set.of(categoryB));
-        Instructor instructor2 = createInstructor("Mislav Nortic", "mnortic", "12345678", "+385987654321", "09:00-17:00", Set.of(categoryA, categoryB));
-        Instructor instructor3 = createInstructor("Laura Kokot", "lkokot", "12345678", "+38598122321", "08:00-16:00", Set.of(categoryA, categoryB));
-        Instructor instructor4 = createInstructor("Goran Lovric", "glovric", "12345678", "+385998887766", "12:00-20:00", Set.of(categoryC, categoryCE));
-        Instructor instructor5 = createInstructor("Sandra Peric", "speric", "12345678", "+385915554433", "07:00-15:00", Set.of(categoryD, categoryDE));
-        Instructor instructor6 = createInstructor("Marko Zuban", "mzuban", "12345678", "+385919876543", "10:00-18:00", Set.of(categoryA1, categoryA2, categoryA));
-        Instructor instructor7 = createInstructor("Dario Knezevic", "dknezevic", "12345678", "+385911234567", "13:00-21:00", Set.of(categoryB, categoryBE));
-        Instructor instructor8 = createInstructor("Mirna Samardzic", "msamardzic", "12345678", "+385955667788", "08:00-16:00", Set.of(categoryC, categoryCE));
-        Instructor instructor9 = createInstructor("Kristijan Pavic", "kpavic", "12345678", "+385919223344", "10:00-18:00", Set.of(categoryD, categoryDE));
-        Instructor instructor10 = createInstructor("Petra Lovrek", "plovrek", "12345678", "+385912334455", "14:00-22:00", Set.of(categoryA1, categoryA2, categoryA));
-        Instructor instructor11 = createInstructor("Marko Silovic", "msilovic", "12345678", "+385918765432", "06:00-14:00", Set.of(categoryF, categoryG));
-        Instructor instructor12 = createInstructor("Tina Medak", "tmedak", "12345678", "+385914567890", "12:00-20:00", Set.of(categoryD1, categoryD1E));
+        Employee instructor1 = createEmployee("Stjepan Bukvic", "sbukvic", "12345678", "+385911441414", RoleType.INSTRUCTOR, "16:00-21:00", Set.of(categoryB));
+        Employee instructor2 = createEmployee("Mislav Nortic", "mnortic", "12345678", "+385987654321", RoleType.INSTRUCTOR, "09:00-17:00", Set.of(categoryA, categoryB));
+        Employee instructor3 = createEmployee("Laura Kokot", "lkokot", "12345678", "+38598122321", RoleType.INSTRUCTOR, "08:00-16:00", Set.of(categoryA, categoryB));
+        Employee instructor4 = createEmployee("Goran Lovric", "glovric", "12345678", "+385998887766", RoleType.INSTRUCTOR, "12:00-20:00", Set.of(categoryC, categoryCE));
+        Employee instructor5 = createEmployee("Sandra Peric", "speric", "12345678", "+385915554433", RoleType.INSTRUCTOR, "07:00-15:00", Set.of(categoryD, categoryDE));
+        Employee instructor6 = createEmployee("Marko Zuban", "mzuban", "12345678", "+385919876543", RoleType.INSTRUCTOR, "10:00-18:00", Set.of(categoryA1, categoryA2, categoryA));
+        Employee instructor7 = createEmployee("Dario Knezevic", "dknezevic", "12345678", "+385911234567", RoleType.INSTRUCTOR, "13:00-21:00", Set.of(categoryB, categoryBE));
+        Employee instructor8 = createEmployee("Mirna Samardzic", "msamardzic", "12345678", "+385955667788", RoleType.INSTRUCTOR, "08:00-16:00", Set.of(categoryC, categoryCE));
+        Employee instructor9 = createEmployee("Kristijan Pavic", "kpavic", "12345678", "+385919223344", RoleType.INSTRUCTOR, "10:00-18:00", Set.of(categoryD, categoryDE));
+        Employee instructor10 = createEmployee("Petra Lovrek", "plovrek", "12345678", "+385912334455", RoleType.INSTRUCTOR, "14:00-22:00", Set.of(categoryA1, categoryA2, categoryA));
+        Employee instructor11 = createEmployee("Marko Silovic", "msilovic", "12345678", "+385918765432", RoleType.INSTRUCTOR, "06:00-14:00", Set.of(categoryF, categoryG));
+        Employee instructor12 = createEmployee("Tina Medak", "tmedak", "12345678", "+385914567890", RoleType.INSTRUCTOR, "12:00-20:00", Set.of(categoryD1, categoryD1E));
 
         Driver driver1 = createDriver("Ana Sporost", "+38591111442", categoryB, 10, false, false);
         Driver driver2 = createDriver("Rajko Brzic", "+38591881442", categoryA, 20, true, false);
@@ -197,19 +197,6 @@ public class DatabaseSeeder {
         return vehicle;
     }
 
-    private Instructor createInstructor(String name, String username, String password, String phone, String availability, Set<Category> categories) {
-        Instructor instructor = new Instructor();
-        instructor.setName(name);
-        instructor.setPhone(phone);
-        instructor.setAvailability(availability);
-        instructor.setCategories(categories);
-        instructor.setUsername(username);
-        instructor.setPassword(BcryptUtil.bcryptHash(password));
-        instructor.setRole(RoleType.INSTRUCTOR);
-        em.persist(instructor);
-        return instructor;
-    }
-
     private Employee createEmployee(String name, String username, String password, String phone, RoleType role) {
         Employee employee = new Employee();
         employee.setName(name);
@@ -217,6 +204,19 @@ public class DatabaseSeeder {
         employee.setRole(role);
         employee.setUsername(username);
         employee.setPassword(BcryptUtil.bcryptHash(password));
+        em.persist(employee);
+        return employee;
+    }
+
+    private Employee createEmployee(String name, String username, String password, String phone, RoleType role, String availability, Set<Category> categories) {
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setPhone(phone);
+        employee.setRole(role);
+        employee.setUsername(username);
+        employee.setPassword(BcryptUtil.bcryptHash(password));
+        employee.setAvailability(availability);
+        employee.setCategories(categories);
         em.persist(employee);
         return employee;
     }
@@ -233,31 +233,31 @@ public class DatabaseSeeder {
         return driver;
     }
 
-    private void createDrivingLesson(Driver driver, Instructor instructor, LocalDateTime start, LocalDateTime end, String location, String comment) {
+    private void createDrivingLesson(Driver driver, Employee instructor, LocalDateTime start, LocalDateTime end, String location, String comment) {
         DrivingLesson lesson = new DrivingLesson();
         lesson.setStartTime(start);
         lesson.setEndTime(end);
         lesson.setLocation(location);
         lesson.setComment(comment);
         lesson.setDriver(driver);
-        lesson.setInstructor(instructor);
+        lesson.setEmployee(instructor);
         lesson.setStatus(StatusType.SCHEDULED);
         em.persist(lesson);
     }
 
-    private void createExam(Driver driver, Instructor instructor, LocalDateTime date, ExamType type, StatusType status) {
+    private void createExam(Driver driver, Employee instructor, LocalDateTime date, ExamType type, StatusType status) {
         Exam exam = new Exam();
         exam.setDate(date);
         exam.setType(type);
         exam.setDriver(driver);
-        exam.setInstructor(instructor);
+        exam.setEmployee(instructor);
         exam.setStatus(status);
         em.persist(exam);
     }
 
-    private void createInstructorVehicle(Instructor instructor, Vehicle vehicle) {
-        InstructorVehicle instructorVehicle = new InstructorVehicle();
-        instructorVehicle.setInstructor(instructor);
+    private void createInstructorVehicle(Employee instructor, Vehicle vehicle) {
+        EmployeeVehicle instructorVehicle = new EmployeeVehicle();
+        instructorVehicle.setEmployee(instructor);
         instructorVehicle.setVehicle(vehicle);
         em.persist(instructorVehicle);
     }

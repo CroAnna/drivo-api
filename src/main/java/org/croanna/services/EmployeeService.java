@@ -9,10 +9,13 @@ import org.croanna.dtos.CreateEmployeeDTO;
 import org.croanna.dtos.EmployeeResponseDTO;
 import org.croanna.dtos.UpdateEmployeeDTO;
 import org.croanna.mappers.EmployeeMapper;
+import org.croanna.models.Category;
 import org.croanna.models.Employee;
 import org.croanna.repositories.EmployeeRepository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @ApplicationScoped
 public class EmployeeService {
@@ -22,6 +25,9 @@ public class EmployeeService {
 
     @Inject
     EmployeeMapper mapper;
+
+    @Inject
+    CategoryService categoryService;
 
     public List<EmployeeResponseDTO> getAllEmployees(int page, int size) {
         return repository.findAll(page, size)
@@ -86,6 +92,13 @@ public class EmployeeService {
         if (dto.getPassword() != null) {
             employee.setPassword(BcryptUtil.bcryptHash(dto.getPassword()));
         }
+        if (dto.getAvailability() != null) {
+            employee.setAvailability(dto.getAvailability());
+        }
+        if (dto.getCategories() != null) {
+            Set<Category> categories = new HashSet<>(categoryService.getCategoriesDataByTitle(dto.getCategories()));
+            employee.setCategories(categories);
+        }
 
         employee = repository.update(employee);
         return mapper.toResponseDTO(employee);
@@ -96,5 +109,7 @@ public class EmployeeService {
         repository.delete(id);
     }
 
-
+    public List<Employee> getAllEmployeesByCategory(Long categoryId) {
+        return repository.findAll(1, 1000, categoryId).stream().toList();
+    }
 }
