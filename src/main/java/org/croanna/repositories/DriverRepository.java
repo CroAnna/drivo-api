@@ -3,6 +3,7 @@ package org.croanna.repositories;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.croanna.dtos.DriverPerCategoryResponseDTO;
 import org.croanna.models.Driver;
 
 import java.util.List;
@@ -44,6 +45,16 @@ public class DriverRepository {
         em.createQuery("DELETE FROM Driver d WHERE d.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
+    }
+
+    public List<DriverPerCategoryResponseDTO> getActiveDriversPerCategory() {
+        return em.createQuery("SELECT new org.croanna.dtos.DriverPerCategoryResponseDTO(c.title, COUNT(d.id)) " +
+                        "FROM Driver d " +
+                        "JOIN d.category c " +
+                        "WHERE d.passedPracticalTest = false " +
+                        "GROUP BY c.title " +
+                        "ORDER BY c.title ASC", DriverPerCategoryResponseDTO.class)
+                .getResultList();
     }
 
 }
