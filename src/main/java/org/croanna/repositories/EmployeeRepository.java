@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import org.croanna.dtos.PersonPerCategoryResponseDTO;
 import org.croanna.models.Employee;
 
 import java.util.List;
@@ -69,5 +70,14 @@ public class EmployeeRepository {
         em.createQuery("DELETE FROM Employee e WHERE e.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
+    }
+
+    public List<PersonPerCategoryResponseDTO> getInstructorsPerCategory() {
+        return em.createQuery("SELECT new org.croanna.dtos.PersonPerCategoryResponseDTO(c.title, COUNT(e.id)) " +
+                        "FROM Employee e " +
+                        "JOIN e.categories c " +
+                        "GROUP BY c.title " +
+                        "ORDER BY c.title ASC", PersonPerCategoryResponseDTO.class)
+                .getResultList();
     }
 }

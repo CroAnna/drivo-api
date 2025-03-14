@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverPerCategoryResponseDTO {
+public class PersonPerCategoryResponseDTO {
     private String categoryName;
-    private Long totalDrivers;
+    private Long totalPersons;
 }
+
